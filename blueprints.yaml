@@ -1,0 +1,19 @@
+name: NoJs theme
+slug: no-js
+type: theme
+version: 1.0.0
+description: "NoJs theme"
+icon: empire
+author:
+  name: Flavien Guillon
+  email: flavien.guillon@gmail.com
+  url: https://flavieng.com
+homepage: https://flavieng.com
+demo: https://flavieng.com
+keywords: no-js, ariaml, theme, core, modern, fast, responsive, html5, css3
+bugs: https://github.com/flavi1
+license: MIT
+
+dependencies:
+    - { name: grav, version: '>=1.6.0' }
+

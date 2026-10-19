@@ -1,0 +1,15 @@
+{# templates/partials/public_messages.html.twig #}
+{% if public_messages is not empty %}
+    <div class="public-messages" style="max-width: 1200px; margin: 1rem auto; padding: 0 1rem;">
+        {% for msg in public_messages %}
+            {% set alert_class = msg.scope == 'error' ? 'danger' : (msg.scope == 'success' ? 'success' : 'info') %}
+            
+            <div class="alert alert-{{ alert_class }}" style="position: relative; padding: 1rem 2.5rem 1rem 1rem; margin-bottom: 0.5rem; border-radius: 4px; border: 1px solid transparent; {{ msg.scope == 'error' ? 'background: #f2dede; color: #a94442; border-color: #ebccd1;' : (msg.scope == 'success' ? 'background: #dff0d8; color: #3c763d; border-color: #d6e9c6;' : 'background: #d9edf7; color: #31708f; border-color: #bce8f1;') }}">
+                
+                {{ msg.message|raw }}
+                
+            </div>
+        {% endfor %}
+    </div>
+
+{% endif %}

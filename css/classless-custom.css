@@ -1,0 +1,288 @@
+/* Core Styles */
+:root {
+    --spacing-base: 2rem;
+    --dialog-height: 600px;
+    --dialog-width: 400px;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+table th {
+	color: inherit;
+}
+
+.warning {
+	background-color: #fff3cd;
+	color: #856404;
+	border: 1px solid #ffeeba;
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+	border-radius: 0.25rem;
+	font-family: sans-serif;
+}
+
+.center {
+    text-align: center;
+}
+
+.search-wrapper {
+    margin-bottom: 12px;
+}
+
+form[name="search"] {
+    display: inline-block;
+    width: 100%;
+}
+
+form[name="search"] input.search-input {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+nav.main-nav > ul {
+    list-style: none;
+    text-align: center;
+    padding-left: 0;
+}
+
+button .fa-heart {
+    color: pink;
+    margin-left: .5em;
+}
+
+a.logo {
+    font-weight: bold;
+    font-size: 1.5em;
+    font-family: monospace;
+    color: #252d39;
+}
+
+.logo>img {
+    vertical-align: middle;
+}
+
+#breadcrumbs {
+    height: auto;
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+#sidebar {
+    position: sticky;
+    top: 0px;
+}
+
+.card {
+    border: solid 1px;
+    padding: 5px;
+    margin: 12px;
+}
+
+@media screen and (min-width: 870px) {
+
+	.sidebar-container {
+		width: clamp(150px,33vw,420px);
+	}
+
+	.blog-collection {
+		display: grid;
+		display: block;
+		grid-template-columns: repeat(2, 1fr);
+		justify-content: stretch;
+		/* gap: 25px; */
+	}
+
+	nav.main-nav > ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+	}
+	
+	main {width: 100%;}
+	
+	div#page-body {
+        display: flex;
+        justify-content: space-between;
+        gap: 5px;
+        flex-direction: row;
+        align-items: stretch;
+	}
+		
+	#breadcrumbs {
+		height: auto;
+		margin-bottom: 2em;
+		text-align: left;
+	}
+	
+}
+
+
+
+
+dialog > * {
+    position: relative;
+}
+
+dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: var(--dialog-width);
+    margin-left: calc(-0.5 * var(--dialog-width));
+    height: var(--dialog-height);
+    margin-top: calc(-0.5 * var(--dialog-height));
+    max-width: 100vw;
+    max-height: 100vh;
+}
+
+@media screen and (max-width: 400px) {
+	dialog {
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 100vw;
+	    margin-left: 0;
+	    height: 100vh;
+	    margin-top: 0;
+	    max-width: 100vw;
+	    max-height: 100vh;
+	}
+}
+
+dialog iframe {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+dialog .button-close-container {
+	position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    color: black;
+    
+}
+
+
+/* Style de base du bouton pour créer un conteneur carré et invisible */
+dialog button[command="close"] {
+	min-width: unset;
+	float: right;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* Optionnel : évite les flashs de sélection bleus sur mobile */
+    -webkit-tap-highlight-color: transparent; 
+}
+
+/* Base commune pour les deux barres de la croix */
+dialog button[command="close"]::before,
+dialog button[command="close"]::after {
+    top: unset;
+    left: unset;
+    content: '';
+    position: absolute;
+    width: 20px;          /* Longueur des branches de la croix */
+    height: 2px;          /* Épaisseur des branches */
+    background-color: #333333; /* Couleur de la croix */
+    border-radius: 1px;   /* Adoucit les extrémités des branches */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Rotation de la première barre à 45 degrés */
+dialog button[command="close"]::before {
+    transform: rotate(45deg);
+}
+
+/* Rotation de la seconde barre à -45 degrés (ou 135deg) */
+dialog button[command="close"]::after {
+    transform: rotate(-45deg);
+}
+
+/* --- Effets au Survol / Focus (Accessibilité & UX) --- */
+
+/* Changement de couleur au survol et focus */
+dialog button[command="close"]:hover::before,
+dialog button[command="close"]:hover::after,
+dialog button[command="close"]:focus-visible::before,
+dialog button[command="close"]:focus-visible::after {
+    background-color: #ff4a4a; /* Devient rouge au survol */
+}
+
+/* Un outline propre uniquement pour les utilisateurs au clavier */
+dialog button[command="close"]:focus-visible {
+    outline: 2px solid #ff4a4a;
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.no-js button.codesh-copy {
+    display: none;
+}
+.codesh-block button.codesh-copy, .codesh-group button.codesh-copy, .codesh-block button.codesh-copy:hover, .codesh-group button.codesh-copy:hover {
+    color: white;
+}
+
+summary {
+    text-decoration: underline;
+}
+
+summary::marker, summary::-webkit-details-marker {
+  display: none;
+  content: "";
+}
+
+body details summary::after {
+	content: ' [+]';
+    display: inline;
+    background: transparent;
+    position: relative;
+    width: auto;
+
+}
+
+body details[open] summary::after {
+	content: ' [-]';
+}
+
+
+main dl > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+main dl > div > dd {
+    text-align: right;
+    max-width: 50%;
+}
+
+footer dl > div {
+}
+
+footer dl > div > dd {
+}
+
+footer, footer dl {
+    display: grid;
+    flex-direction: row;
+    justify-content: stretch;
+    align-content: stretch;
+    grid-auto-flow: column;
+    align-items: baseline;
+}
+
+footer > :last-child {
+    text-align: right;
+}

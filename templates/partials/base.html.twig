@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="{{ page.language | default(grav.language.getActive) | e }}" class="no-js">
+{% set theme_config = attribute(config.themes, config.system.pages.theme) %}
+<head>
+{% block head %}
+    <meta charset="utf-8" />
+    <title>{% if header.title %}{{ header.title|e }} | {% endif %}{{ site.title|e }}</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include 'partials/metadata.html.twig' %}
+
+    <link rel="icon" href="{{ url('theme://images/favicon.ico')|e }}" />
+    <link rel="canonical" href="{{ page.url(true, true)|e }}" />
+    
+	<!--script defer src="https://cloud.umami.is/script.js" data-website-id="4b324258-2b7a-470f-a68e-dff93852769c"></script-->
+{% endblock head %}
+
+{% block stylesheets %}
+	{% include 'partials/assets.html.twig' %}
+{% endblock %}
+
+	
+
+
+{% block assets deferred %}
+    {{ assets.css()|raw }}
+<!--
+    {{ assets.js()|raw }}
+-->
+{% endblock %}
+
+</head>
+<body id="top" class="{{ page.header.body_classes|e }}">
+
+{% set current_lang = grav.language.getActive %}
+
+
+{% set z_header = z(page.template, 'header.html.twig') %}
+{% if z_header %}
+	{% include z_header %}
+{% endif %}
+
+{% set z_alert = z(page.template, 'alert.html.twig') %}
+{% if z_alert %}
+	{% include z_alert %}
+{% endif %}
+
+<div id="page-body"{% if sidebar %} class="has-sidebar"{% endif %}>
+{% block body %}
+		
+		{% set z_sidebar = z(page.template, 'sidebar.html.twig') %}
+		{% if z_sidebar %}
+			{% include z_sidebar %}
+		{% endif %}
+		
+		<main>
+			{% block content %}{% endblock %}
+		</main>
+		
+{% endblock %}
+</div>
+
+{% set z_footer = z(page.template, 'footer.html.twig') %}
+{% if z_footer %}
+	{% include z_footer %}
+{% endif %}
+
+</body>
+</html>

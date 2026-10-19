@@ -1,0 +1,35 @@
+{% extends 'partials/base.html.twig' %}
+{% set blog_image = page.media.images[page.header.hero_image] ?: page.media.images|first %}
+{% set show_pagination = header_var('show_pagination', [page, blog])|defined(true) %}
+{% set collection = page.collection() %}
+{% set blog = page.find(header_var('blog_url')|defined(theme_var('blog-page'))) %}
+
+
+
+
+{% block content %}
+<div id="blog-wrapper" class="blog-listing">
+    <div class="container">
+        
+            {% block item %}
+
+                <div class="blog-collection">
+                {% for child in collection %}
+                    {% include 'partials/blog-list-item.html.twig' with {blog: page, page: child} %}
+                {% endfor %}
+                </div>
+
+                {% if show_pagination and config.plugins.pagination.enabled and collection.params.pagination %}
+                    <div id="listing-footer">
+                        {% include 'partials/pagination.html.twig' with {base_url: page.url, pagination: collection.params.pagination} %}
+                    </div>
+                {% endif %}
+
+            {% endblock %}
+
+	</div>
+</div>
+{% endblock %}
+
+
+

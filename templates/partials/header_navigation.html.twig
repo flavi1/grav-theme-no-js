@@ -1,0 +1,34 @@
+<ul {{ tree ? 'class="tree"' : '' }}>
+	<li><a class="logo left" href="{{ (base_url == '' ? '/' : base_url)|e }}">
+		<img style="width: 64px;" alt="logo" src="{{ url('theme://images/logo.svg')|e }}">
+		{{ config.site.title|e }}
+	</a></li>
+	{# On récupère uniquement les pages visibles de niveau 0 #}
+	{% for page in pages.children.visible %}
+	{% if not page.home %}
+		<li class="{{ page.active ? 'is-active' : '' }}">
+			<a href="{{ page.url }}">{{ page.title }}</a>
+		</li>
+	{% endif %}
+	{% endfor %}
+	
+	{% if config.plugins['simple-shop'].enabled %}
+		<li>
+			{% set cart_route = config.plugins['simple-shop'].routes.cart|default('/cart') %}
+			<a href="{{ base_url_absolute ~ cart_route }}">Mon Panier ({{ shop_cart_count }})</a>
+		</li>
+		<li>
+			{% set identify_route = config.plugins['simple-shop'].routes.identify|default('/identify') %}
+			{% if customer.firstname %}
+				<a href="{{ base_url_absolute ~ identify_route }}">S'identifier</a>
+			{% else %}
+				Bonjour {{ customer.firstname }}
+			{% endif %}
+		</li>
+	{% endif %}
+	
+</ul>
+
+
+
+{% include 'partials/public_messages.html.twig' %}
