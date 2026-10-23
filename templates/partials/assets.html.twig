@@ -2,3 +2,14 @@
 {% do assets.addCss('https://cdn.jsdelivr.net/gh/digitallytailored/classless@latest/classless.min.css', -1) %}
 {% do assets.addCss('theme://css/classless-custom.css', -2) %}
 {% do assets.addCss('theme://css/custom.css', -3) %}
+{#
+   Thème sombre : feuilles À PART, chargées après les autres (priorité plus basse = plus tard), sans règle @media à
+   l'intérieur — c'est l'attribut `media` du <link> qui décide quand elles s'appliquent :
+     - classless-dark.css : sombre de base (classless + no-js), fourni ici ;
+     - custom-dark.css    : complément du thème enfant (même principe que custom.css), facultatif.
+   Par défaut elles suivent la préférence du système. Pour forcer plus tard sans JavaScript (cookie, paramètre…), il suffit
+   de définir `dark_css_media` avant cet include : 'all' = toujours sombre, 'not all' = jamais.
+#}
+{% set dark_media = dark_css_media|default('(prefers-color-scheme: dark)') %}
+{% do assets.addCss('theme://css/classless-dark.css', {priority: -10, media: dark_media, pipeline: false}) %}
+{% do assets.addCss('theme://css/custom-dark.css', {priority: -11, media: dark_media, pipeline: false}) %}

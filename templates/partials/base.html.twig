@@ -11,6 +11,10 @@
     {% include 'partials/metadata.html.twig' %}
 
     <link rel="icon" href="{{ url('theme://images/favicon.ico')|e }}" />
+    {% set favicon_dark = url('theme://images/favicon-dark.ico') %}
+    {% if favicon_dark %}
+    <link rel="icon" href="{{ favicon_dark|e }}" media="(prefers-color-scheme: dark)" />
+    {% endif %}
     <link rel="canonical" href="{{ page.url(true, true)|e }}" />
     
 	<!--script defer src="https://cloud.umami.is/script.js" data-website-id="4b324258-2b7a-470f-a68e-dff93852769c"></script-->
